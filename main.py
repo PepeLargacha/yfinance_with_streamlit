@@ -14,7 +14,7 @@ Showing candlesticks for BTC-USD.
 # Get the data from yfinance
 tickersymbol = 'BTC-USD'
 tickerdata = yf.Ticker(tickersymbol)
-ticker_df = tickerdata.history(period='2mo', interval='1h', actions=False)
+ticker_df = tickerdata.history(period='1y', interval='1d', actions=False)
 
 # Plot the candlesticks
 figure = go.Figure(
