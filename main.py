@@ -5,7 +5,7 @@ import pandas as pd
 st.write("""
 # Simple Stock Price App
 
-Showing closing price and volume for Google
+Showing closing price and volume for Apple.
 """)
 
 tickersymbol = 'AAPL'
