@@ -31,9 +31,9 @@ figure = go.Figure(
             high=ticker_df['High'],
             open=ticker_df['Open'],
             close=ticker_df['Close'],
-            name='Candlesticks'
+            name='Candlesticks',
           )
     ])
-figure.update_layout(xaxis_rangeslider_visible=False)
+figure.update_layout(xaxis_rangeslider_visible=False, plot_bgcolor='rgba(0,0,0,0)')
 
 st.write(figure)
