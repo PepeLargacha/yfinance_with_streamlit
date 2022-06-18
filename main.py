@@ -42,7 +42,7 @@ figure.add_trace(go.Candlestick(
                                 high=ticker_df['High'],
                                 open=ticker_df['Open'],
                                 close=ticker_df['Close'],
-                                name="Price",
+                                showlegend=False),
                                 increasing=dict(line=dict(color='#26a69a')),
                                 decreasing=dict(line=dict(color='#ef5350'))),
                  row=1, col=1)
