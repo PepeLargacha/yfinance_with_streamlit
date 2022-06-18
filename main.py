@@ -6,6 +6,7 @@ from plotly.subplots import make_subplots as mksub
 import pandas as pd
 
 pd.options.plotting.backend = "plotly"
+
 # Create a sidebar with filters for the data
 st.sidebar.header("Filters")
 tickersymbol = st.sidebar.text_input("Ticker Symbol", "BTC-USD").upper()
@@ -79,10 +80,18 @@ figure.add_trace(go.Bar(
                         marker_color='red'),
                  row=2, col=1)
 
+# Plot the volume moving average
+figure.add_trace(go.Scatter(
+                            x=ticker_df.index,
+                            y=ticker_df['VMA20'],
+                            marker_color='lightgrey',
+                            name="VMA20"),
+                 row=2, col=1)
+
 figure.update_layout(
     title=f"{tickersymbol}",
-    xaxis_tickfont_size=12,
-    yaxis_tickfont_size=12,
+    xaxis_tickfont_size=14,
+    yaxis_tickfont_size=14,
     autosize=False,
     width=800,
     height=600,
