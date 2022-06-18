@@ -9,7 +9,7 @@ pd.options.plotting.backend = "plotly"
 # Create a sidebar with filters for the data
 st.sidebar.header("Filters")
 tickersymbol = st.sidebar.text_input("Ticker Symbol", "BTC-USD").upper()
-from_date = st.sidebar.date_input("From", value=pd.Timestamp('2021-01-01'))
+from_date = st.sidebar.date_input("From", value=pd.Timestamp('2022-01-01'))
 to_date = st.sidebar.date_input("To", value=pd.Timestamp(datetime.today()))
 interval = st.sidebar.selectbox("Interval", ["1h", "1d", '1wk', '1mo'], index=1)
 
@@ -26,8 +26,8 @@ ticker_df = tickerdata.history(start=from_date,
                                actions=False)
 
 # Adding Moving Average to the dataframe
-ticker_df['MA12'] = ticker_df['Close'].rolling(window=12, min_periods=0).mean()
-ticker_df['MA20'] = ticker_df['Close'].rolling(window=20, min_periods=0).mean()
+ticker_df['MA9'] = ticker_df['Close'].rolling(window=9, min_periods=0).mean()
+ticker_df['MA21'] = ticker_df['Close'].rolling(window=21, min_periods=0).mean()
 ticker_df['MA200'] = ticker_df['Close'].rolling(window=200, min_periods=0).mean()
 ticker_df['VMA20'] = ticker_df['Volume'].rolling(window=20, min_periods=0).mean()
 
@@ -43,23 +43,23 @@ figure.add_trace(go.Candlestick(
                                 open=ticker_df['Open'],
                                 close=ticker_df['Close'],
                                 name="Price",
-                                increasing=dict(line=dict(color='#00ff00')),
-                                decreasing=dict(line=dict(color='#ff0000'))),
+                                increasing=dict(line=dict(color='#26a69a')),
+                                decreasing=dict(line=dict(color='#ef5350'))),
                  row=1, col=1)
 
 # Plot the moving average
 figure.add_trace(go.Scatter(
                             x=ticker_df.index,
-                            y=ticker_df['MA12'],
-                            marker_color='lightgreen',
-                            name="MA12"),
+                            y=ticker_df['MA9'],
+                            marker_color='#4caf50',
+                            name="MA9"),
                  row=1, col=1)
 
 figure.add_trace(go.Scatter(
                             x=ticker_df.index,
-                            y=ticker_df['MA20'],
-                            marker_color='yellow',
-                            name="MA20"),
+                            y=ticker_df['MA21'],
+                            marker_color='#ffeb3b',
+                            name="MA21"),
                  row=1, col=1)
 
 figure.add_trace(go.Scatter(
@@ -85,7 +85,8 @@ figure.update_layout(
     autosize=False,
     width=800,
     height=600,
-    margin=dict(l=50, r=50, b=100, t=100, pad=4))
+    margin=dict(l=50, r=50, b=100, t=100, pad=4),
+    plot_bgcolor='#151924',)
 
 figure.update(layout_xaxis_rangeslider_visible=False)
 
