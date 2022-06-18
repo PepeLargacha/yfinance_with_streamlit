@@ -1,3 +1,4 @@
+from datetime import datetime
 import yfinance as yf
 import streamlit as st
 import plotly.graph_objects as go
@@ -11,10 +12,15 @@ st.write("""
 Showing candlesticks for BTC-USD.
 """)
 
+st.sidebar.header("User Input")
+tickersymbol = st.sidebar.text_input("Ticker Symbol", "BTC-USD")
+from_date = st.sidebar.date_input("From", value=pd.Timestamp('2021-01-01'))
+to_date = st.sidebar.date_input("To", value=pd.Timestamp(datetime.today()))
+interval = st.sidebar.selectbox("Interval", ["1h", "1d", '1wk', '1mo'])
+
 # Get the data from yfinance
-tickersymbol = 'BTC-USD'
 tickerdata = yf.Ticker(tickersymbol)
-ticker_df = tickerdata.history(period='1y', interval='1d', actions=False)
+ticker_df = tickerdata.history(start=from_date, end=to_date, interval=interval, actions=False)
 
 # Plot the candlesticks
 figure = go.Figure(
