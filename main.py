@@ -26,10 +26,10 @@ ticker_df = tickerdata.history(start=from_date,
                                actions=False)
 
 # Adding Moving Average to the dataframe
-ticker_df['MA9'] = ticker_df['Close'].rolling(window=9, min_periods=0).mean()
-ticker_df['MA21'] = ticker_df['Close'].rolling(window=21, min_periods=0).mean()
-ticker_df['MA200'] = ticker_df['Close'].rolling(window=200, min_periods=0).mean()
-ticker_df['VMA20'] = ticker_df['Volume'].rolling(window=20, min_periods=0).mean()
+ticker_df['MA9'] = ticker_df['Close'].rolling(window=9, min_periods=5).mean()
+ticker_df['MA21'] = ticker_df['Close'].rolling(window=21, min_periods=10).mean()
+ticker_df['MA200'] = ticker_df['Close'].rolling(window=200, min_periods=50).mean()
+ticker_df['VMA20'] = ticker_df['Volume'].rolling(window=20, min_periods=4).mean()
 
 # Plot the candlesticks
 figure = mksub(rows=2, cols=1, shared_xaxes=True,
